@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#eslint lint problem solve
+.eslintrc.js
+tslint-to-eslint-config.log
