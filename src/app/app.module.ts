@@ -9,8 +9,6 @@ import { TimeTaskComponent } from './components/time-task/time-task.component';
 import { ListTaskComponent } from './components/list-task/list-task.component';
 import { HomeComponent } from './components/home/home.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
