@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TimeTaskComponent } from './components/time-task/time-task.component';
 import { ListTaskComponent } from './components/list-task/list-task.component';
 import { HomeComponent } from './components/home/home.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HomeComponent } from './components/home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
