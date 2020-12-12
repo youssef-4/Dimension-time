@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.sumitted = true;
   }
 
+  // TODO : INPUT DESCRIPTION
   loggerFormAndFieldsInfo(): void{
     console.log('---------------------------------------------------');
     // ! Email Field Validation Result

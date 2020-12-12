@@ -7,46 +7,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  // ! Default icon when not make click in the show Password icon
   icon = 'far fa-eye';
-
-  changeIcon(): void {
-    this.icon === 'far fa-eye'
-    ?
-      this.icon = 'far fa-eye-slash'
-    :
-      this.icon = 'far fa-eye';
-
-    console.log('Pasword icon changed to ' + this.icon);
-
-    this.changePassword('iamapassword');
-  }
-
-  changePassword(idInput: string): void{
-    const maybeMyElement = document.getElementById(idInput);
-    if (maybeMyElement?.getAttribute('type') === 'text'){
-      maybeMyElement?.setAttribute('type', 'password');
-    } else{
-      maybeMyElement?.setAttribute('type', 'text');
-    }
-  }
-  // tslint:disable-next-line: member-ordering
-  showPasswordOption = false;
-  visible($event: any): boolean{
-    console.log($event);
-    console.log($event.key);
-    console.log($event.target);
-    const item = document.getElementById($event.target.id) as HTMLInputElement;
-    if (item?.value.length > 0){
-      this.showPasswordOption = true;
-      return true;
-    }else{
-      this.showPasswordOption = false;
-      return false;
-    }
-  }
 
   // ! Check if the button of Form loginForm it's submit or not
   sumitted = false;
+
+  // ! If the password it's null hidde button show password else display button
+  showPasswordOption = false;
 
   // ! Validaciones del formulario loginForm
   registerForm = new FormGroup({
@@ -75,12 +43,51 @@ export class RegisterComponent implements OnInit {
     )
   });
 
+  // ! Change icon on make click in the element
+  changeIcon(element: string): void {
+    this.icon === 'far fa-eye'
+    ?
+      this.icon = 'far fa-eye-slash'
+    :
+      this.icon = 'far fa-eye';
+
+    console.log('Pasword icon changed to ' + this.icon);
+    console.log(document.getElementById('iamapassword'));
+    this.changePassword(element);
+  }
+
+  // TODO : INPUT DESCRIPTION
+  changePassword(idInput: string): void{
+    const maybeMyElement = document.getElementById(idInput);
+    if (maybeMyElement?.getAttribute('type') === 'text'){
+      maybeMyElement?.setAttribute('type', 'password');
+    } else{
+      maybeMyElement?.setAttribute('type', 'text');
+    }
+  }
+
+  // TODO : INPUT DESCRIPTION
+  visible($event: any): boolean{
+    console.log($event);
+    console.log($event.key);
+    console.log($event.target);
+    const item = document.getElementById($event.target.id) as HTMLInputElement;
+    if (item?.value.length > 0){
+      this.showPasswordOption = true;
+      return true;
+    }else{
+      this.showPasswordOption = false;
+      return false;
+    }
+  }
+
   // ! Verificación del formulario loginForm
   submitForm(): void{
     this.loggerFormAndFieldsInfo();
     this.sumitted = true;
   }
 
+  // TODO : INPUT DESCRIPTION
   loggerFormAndFieldsInfo(): void{
     console.log('---------------------------------------------------');
     // ! Email Field Validation Result
