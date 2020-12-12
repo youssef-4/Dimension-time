@@ -8,7 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   // ! Default icon when not make click in the show Password icon
-  icon = 'far fa-eye';
+  icon1 = 'far fa-eye';
+  icon2 = 'far fa-eye';
 
   // ! Check if the button of Form loginForm it's submit or not
   sumitted = false;
@@ -44,17 +45,30 @@ export class RegisterComponent implements OnInit {
   });
 
   // ! Change icon on make click in the element
-  changeIcon(element: string): void {
-    this.icon === 'far fa-eye'
+  changeIconI(element: string): void {
+    this.icon1 === 'far fa-eye'
     ?
-      this.icon = 'far fa-eye-slash'
+      this.icon1 = 'far fa-eye-slash'
     :
-      this.icon = 'far fa-eye';
+      this.icon1 = 'far fa-eye';
 
-    console.log('Pasword icon changed to ' + this.icon);
+    console.log('Pasword icon changed to ' + this.icon1);
     console.log(document.getElementById('iamapassword'));
     this.changePassword(element);
   }
+
+    // ! Change icon on make click in the element
+    changeIconII(element: string): void {
+      this.icon2 === 'far fa-eye'
+      ?
+        this.icon2 = 'far fa-eye-slash'
+      :
+        this.icon2 = 'far fa-eye';
+
+      console.log('Pasword icon changed to ' + this.icon2);
+      console.log(document.getElementById('iamapassword'));
+      this.changePassword(element);
+    }
 
   // TODO : INPUT DESCRIPTION
   changePassword(idInput: string): void{

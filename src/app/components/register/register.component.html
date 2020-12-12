@@ -28,23 +28,32 @@
     <input type="password" class="form-control" id="iamapassword" placeholder="Input your password please"
     [formControlName]="'password1'" [ngClass]="formInputColor('password1')" (keyup)="visible($event)">
     <span class="input-group-btn">
-      <button *ngIf="showPasswordOption" class="btn btn-default reveal" type="button" (click)="changeIcon('iamapassword')"><i class="{{icon}}"></i></button>
+      <button *ngIf="showPasswordOption" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIconI('iamapassword')"><i class="{{icon1}}"></i></button>
     </span>
   </div>
-  <small id="passwordHelp" class="form-text" *ngIf="msgColor('password1')"
+  <small id="passwordHelp" class="form-text mb-2" *ngIf="msgColor('password1')"
   [ngClass]="msgColor('password1')? 'text-danger' : 'text-success'">
   Password no válida, mínimo 6 carácteres
 </small>
 
   <!--Confirm Password-->
-  <div class="form-group mt-5">
-    <label for="inputEmail4">Confirm Password</label>
-    <input type="password" class="form-control" placeholder="Repeat password" formControlName="password1">
-  </div>
+ <!-- Password" --> <!-- <i class="far fa-eye"></i> icon -->
+ <label for="iamapassword" class="d-block mt-5">Password</label>
+ <div class="input-group">
+   <input type="password" class="form-control" id="iamapassword2" placeholder="Input your password please"
+   [formControlName]="'password2'" [ngClass]="formInputColor('password2')" (keyup)="visible($event)">
+   <span class="input-group-btn">
+     <button *ngIf="showPasswordOption" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIconII('iamapassword2')"><i class="{{icon2}}"></i></button>
+   </span>
+ </div>
+ <small id="passwordHelp" class="form-text mb-2" *ngIf="msgColor('password2')"
+ [ngClass]="msgColor('password2')? 'text-danger' : 'text-success'">
+ Password no válida, mínimo 6 carácteres
+</small>
 
   <!--Send form Buttom-->
   <div class="text-center w-100">
-    <button type="submit" class="btn btn-dark d-inline mt-2 mb-3">Submit</button>
+    <button type="submit" class="btn btn-dark d-inline mt-5 mb-3">Submit</button>
     <!--[disabled]="!loginForm.valid" -->
   </div>
 </form>
