@@ -41,7 +41,7 @@
  <label for="iamapassword2" class="d-block mt-5">Password</label>
  <div class="input-group">
    <input type="password" class="form-control" id="iamapassword2" placeholder="Input your password please"
-   [formControlName]="'password2'" [ngClass]="formInputColor('password2')" (keyup)="visible($event, 2)">
+   [formControlName]="'password2'" [ngClass]="formInputColor('password2')" (keyup)="visible($event, 2)" (input)="resetIconNotTxt($event, 2)" (focusout)="resetIconNotTxt($event, 2)">
    <span class="input-group-btn">
      <button *ngIf="passwords.password2.showPasswordOption" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIcon('iamapassword2', 2)"><i class="{{passwords.password2.icon}}"></i></button>
    </span>

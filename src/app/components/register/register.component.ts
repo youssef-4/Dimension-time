@@ -82,6 +82,25 @@ export class RegisterComponent implements OnInit {
     this.changePassword(element);
   }
 
+  resetIconNotTxt(e: any, num: number): void {
+    const input = document.getElementById(e.target.id) as HTMLTextAreaElement;
+    // console.log('Trim', input.value.trim());
+    // console.log(input.value.trim().length);
+    if (input.value.trim().length === 0 && input?.getAttribute('type') === 'text') {
+      console.log('La contraseña se oculta por seguridad');
+      console.log(input);
+      this.changeIcon(input.id, num);
+    }
+    // TODO: Si queremos que cuando perdamos el foco del input se oculte la contraseña descomentamos este código
+    /*
+    if (input?.getAttribute('type') === 'text') {
+      console.log('Va a cambiarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+      console.log(input);
+      this.changeIcon(input.id, num);
+    }
+    */
+  }
+
   // TODO : INPUT DESCRIPTION
   changePassword(idInput: string): void {
     const maybeMyElement = document.getElementById(idInput);
