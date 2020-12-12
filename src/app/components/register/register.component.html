@@ -22,34 +22,40 @@
     Dirección de correo no válida
   </small>
 
-  <!-- Password" --> <!-- <i class="far fa-eye"></i> icon -->
+  <!-- Password1" -->
+  <!-- <i class="far fa-eye"></i> icon -->
   <label for="iamapassword1" class="d-block mt-5">Password</label>
   <div class="input-group">
-    <input type="password1" class="form-control" id="iamapassword1" placeholder="Input your password please"
-    [formControlName]="'password1'" [ngClass]="formInputColor('password1')" (keyup)="visible($event, 1)">
+    <input type="password" class="form-control" id="iamapassword1" placeholder="Input your password please"
+      [formControlName]="'password1'" [ngClass]="formInputColor('password1')" (keyup)="visible($event, 1)"
+      (input)="resetIconNotTxt($event, 1)" (focusout)="resetIconNotTxt($event, 1)">
     <span class="input-group-btn">
-      <button *ngIf="passwords.password1.showPasswordOption" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIcon('iamapassword1', 1)"><i class="{{passwords.password1.icon}}"></i></button>
+      <button *ngIf="passwords.password1.showPasswordOption" class="btn btn-default reveal bg-secondary" type="button"
+        (click)="changeIcon('iamapassword1', 1)"><i class="{{passwords.password1.icon}}"></i></button>
     </span>
   </div>
   <small id="passwordHelp" class="form-text mb-2" *ngIf="msgColor('password1')"
-  [ngClass]="msgColor('password1')? 'text-danger' : 'text-success'">
-  Password no válida, mínimo 6 carácteres
-</small>
+    [ngClass]="msgColor('password1')? 'text-danger' : 'text-success'">
+    Password no válida, mínimo 6 carácteres
+  </small>
 
   <!--Confirm Password-->
- <!-- Password" --> <!-- <i class="far fa-eye"></i> icon -->
- <label for="iamapassword2" class="d-block mt-5">Password</label>
- <div class="input-group">
-   <input type="password" class="form-control" id="iamapassword2" placeholder="Input your password please"
-   [formControlName]="'password2'" [ngClass]="formInputColor('password2')" (keyup)="visible($event, 2)" (input)="resetIconNotTxt($event, 2)" (focusout)="resetIconNotTxt($event, 2)">
-   <span class="input-group-btn">
-     <button *ngIf="passwords.password2.showPasswordOption" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIcon('iamapassword2', 2)"><i class="{{passwords.password2.icon}}"></i></button>
-   </span>
- </div>
- <small id="passwordHelp" class="form-text mb-2" *ngIf="msgColor('password2')"
- [ngClass]="msgColor('password2')? 'text-danger' : 'text-success'">
- Password no válida, mínimo 6 carácteres
-</small>
+  <!-- Password2" -->
+  <!-- <i class="far fa-eye"></i> icon -->
+  <label for="iamapassword2" class="d-block mt-5">Password</label>
+  <div class="input-group">
+    <input type="password" class="form-control" id="iamapassword2" placeholder="Input your password please"
+      [formControlName]="'password2'" [ngClass]="formInputColor('password2')" (keyup)="visible($event, 2)"
+      (input)="resetIconNotTxt($event, 2)" (focusout)="resetIconNotTxt($event, 2)">
+    <span class="input-group-btn">
+      <button *ngIf="passwords.password2.showPasswordOption" class="btn btn-default reveal bg-secondary" type="button"
+        (click)="changeIcon('iamapassword2', 2)"><i class="{{passwords.password2.icon}}"></i></button>
+    </span>
+  </div>
+  <small id="passwordHelp" class="form-text mb-2" *ngIf="msgColor('password2')"
+    [ngClass]="msgColor('password2')? 'text-danger' : 'text-success'">
+    La password no es igual a password1 o no tiene 6 caracteres
+  </small>
 
   <!--Send form Buttom-->
   <div class="text-center w-100">
@@ -57,17 +63,3 @@
     <!--[disabled]="!loginForm.valid" -->
   </div>
 </form>
-
-
-
-<!--
-  <div class="form-group">
-    <label for="password1">Password</label>
-    <input type="password" class="form-control" id="inputPassword" placeholder="Input your password please"
-      [formControlName]="'password1'" [ngClass]="formInputColor('password1')">
-  </div>
-  <small id="passwordHelp" class="form-text" *ngIf="msgColor('password1')"
-    [ngClass]="msgColor('password1')? 'text-danger' : 'text-success'">
-    Password no válida, mínimo 6 carácteres
-  </small>
--->

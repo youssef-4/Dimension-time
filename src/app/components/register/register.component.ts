@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-register',
@@ -20,24 +21,27 @@ export class RegisterComponent implements OnInit {
   sumitted = false;
 
   // ! Validaciones del formulario loginForm
-  registerForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-    ]),
-    password1: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-    password2: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  });
+  registerForm = new FormGroup(
+    {
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      ]),
+      password1: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      password2: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        RxwebValidators.compare({fieldName: 'password1'})
+      ]),
+    }
+  );
 
-  // TODO : INPUT DESCRIPTION
-  visible($event: any, num: number): boolean {
+  // Show or hidde button if the input have text
+visible($event: any, num: number): boolean {
     console.log($event);
     console.log($event.key);
     console.log($event.target);
@@ -63,7 +67,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // ! Change icon on make click in the element
-  changeIcon(element: string, num: number): void {
+changeIcon(element: string, num: number): void {
     if (this.passwords.password1.item === num) {
       this.passwords.password1.icon === 'far fa-eye'
         ? (this.passwords.password1.icon = 'far fa-eye-slash')
@@ -82,27 +86,27 @@ export class RegisterComponent implements OnInit {
     this.changePassword(element);
   }
 
-  resetIconNotTxt(e: any, num: number): void {
+  // ! - Volverá a asingar el
+  // TODO: Si queremos que cuando perdamos el foco del input se oculte la contraseña utilizaremos y añadiremos el correspondiente evento
+  // * if (input?.getAttribute('type') === 'text') { this.changeIcon(input.id, num); }
+  // * Y finalmente añadimos (focusout)="resetIconNotTxt($event, 2) al input
+resetIconNotTxt(e: any, num: number): void {
     const input = document.getElementById(e.target.id) as HTMLTextAreaElement;
     // console.log('Trim', input.value.trim());
     // console.log(input.value.trim().length);
-    if (input.value.trim().length === 0 && input?.getAttribute('type') === 'text') {
+    if (
+      input.value.trim().length === 0 &&
+      input?.getAttribute('type') === 'text'
+    ) {
       console.log('La contraseña se oculta por seguridad');
       console.log(input);
       this.changeIcon(input.id, num);
     }
-    // TODO: Si queremos que cuando perdamos el foco del input se oculte la contraseña descomentamos este código
-    /*
-    if (input?.getAttribute('type') === 'text') {
-      console.log('Va a cambiarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
-      console.log(input);
-      this.changeIcon(input.id, num);
-    }
-    */
+
   }
 
-  // TODO : INPUT DESCRIPTION
-  changePassword(idInput: string): void {
+  // ! - Change input type to the password type to text type
+changePassword(idInput: string): void {
     const maybeMyElement = document.getElementById(idInput);
     if (maybeMyElement?.getAttribute('type') === 'text') {
       maybeMyElement?.setAttribute('type', 'password');
@@ -112,13 +116,13 @@ export class RegisterComponent implements OnInit {
   }
 
   // ! Verificación del formulario loginForm
-  submitForm(): void {
+submitForm(): void {
     this.loggerFormAndFieldsInfo();
     this.sumitted = true;
   }
 
   // TODO : INPUT DESCRIPTION
-  loggerFormAndFieldsInfo(): void {
+loggerFormAndFieldsInfo(): void {
     console.log('---------------------------------------------------');
     // ! Email Field Validation Result
     this.registerForm.get('name')?.status === 'VALID'
@@ -144,7 +148,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // ! Change color of the input with BootStrap class is-valid or is-invalid
-  formInputColor(field: string): string {
+formInputColor(field: string): string {
     if (this.sumitted === true) {
       if (this.registerForm?.get(field)?.status === 'VALID') {
         return 'is-valid';
@@ -156,7 +160,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // ! Msg color return true or false for make the message visible or hidden
-  msgColor(field: string): boolean {
+msgColor(field: string): boolean {
     if (this.sumitted === true) {
       if (this.registerForm?.get(field)?.status === 'VALID') {
         return false;
@@ -167,7 +171,7 @@ export class RegisterComponent implements OnInit {
     return true;
   }
 
-  constructor() {}
+constructor() {}
 
-  ngOnInit(): void {}
+ngOnInit(): void {}
 }
