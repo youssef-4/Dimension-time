@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.sumitted = true;
   }
 
-  // TODO : INPUT DESCRIPTION
+  // ! Print the status of the Fields & the status of the complete form
   loggerFormAndFieldsInfo(): void{
     console.log('---------------------------------------------------');
     // ! Email Field Validation Result
