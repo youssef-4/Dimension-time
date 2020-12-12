@@ -7,8 +7,10 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  // ! Check if the button of Form loginForm it's submit or not
   sumitted = false;
 
+  // ! Validaciones del formulario loginForm
   loginForm = new FormGroup({
     email: new FormControl('',
       [
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
     )
   });
 
+  // ! Verificación del formulario loginForm
   submitForm(): void{
     this.loggerFormAndFieldsInfo();
     this.sumitted = true;
@@ -31,13 +34,16 @@ export class LoginComponent implements OnInit {
 
   loggerFormAndFieldsInfo(): void{
     console.log('---------------------------------------------------');
+    // ! Email Field Validation Result
     this.loginForm.get('email')?.status === 'VALID' ? console.log('Email OK') : console.error('Email KO');
+    // ! Password Field Validation
     this.loginForm.get('password')?.status === 'VALID' ? console.log('Password OK') : console.error('Password KO');
-    /* Form Validation */
+    // ! Form Validation Result
     this.loginForm?.status === 'VALID' ? console.log('Form OK') : console.error('Form KO');
     console.log('---------------------------------------------------');
   }
 
+  // ! Change color of the input with BootStrap class is-valid or is-invalid
   formInputColor(field: string): string{
     if (this.sumitted === true){
       if (this.loginForm?.get(field)?.status === 'VALID'){
@@ -49,6 +55,7 @@ export class LoginComponent implements OnInit {
     return 'is-invalid';
   }
 
+  // ! Msg color return true or false for make the message visible or hidden
   msgColor(field: string): boolean{
     if (this.sumitted === true){
       if (this.loginForm?.get(field)?.status === 'VALID'){

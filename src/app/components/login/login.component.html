@@ -1,35 +1,30 @@
 <div class="d-flex justify-content-center align-items-center h-100 d-inline-block">
   <form [formGroup]="loginForm" (ngSubmit)="submitForm()"><!--class="was-validated"-->
 
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="inputEmail" placeholder="Input your email please"
-            [formControlName]="'email'"
-            [ngClass]="formInputColor('email')">
-        </div>
-        <small id="emailHelp" class="form-text"
-          *ngIf = "msgColor('email')"
-          [ngClass]="msgColor('email')? 'text-danger' : 'text-success'">
-            Password no válida, mínimo 6 carácteres
-        </small>
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="inputEmail" placeholder="Input your email please"
+        [formControlName]="'email'" [ngClass]="formInputColor('email')">
+    </div>
+    <small id="emailHelp" class="form-text" *ngIf="msgColor('email')"
+      [ngClass]="msgColor('email')? 'text-danger' : 'text-success'">
+      Dirección de correo no válida
+    </small>
 
     <!-- Password" -->
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" class="form-control" id="inputPassword" placeholder="Input your password please"
-        [formControlName]="'password'"
-        [ngClass]="formInputColor('password')">
+        [formControlName]="'password'" [ngClass]="formInputColor('password')">
     </div>
-    <small id="passwordHelp" class="form-text"
-      *ngIf = "msgColor('password')"
+    <small id="passwordHelp" class="form-text" *ngIf="msgColor('password')"
       [ngClass]="msgColor('password')? 'text-danger' : 'text-success'">
-        Password no válida, mínimo 6 carácteres
+      Password no válida, mínimo 6 carácteres
     </small>
 
     <div class="text-center w-100">
-      <button type="submit" class="btn btn-dark d-inline mt-2 mb-3">Submit</button>
-      <!--[disabled]="!loginForm.valid" -->
+      <button type="submit" class="btn btn-dark d-inline mt-2 mb-3">Submit</button><!--[disabled]="!loginForm.valid" -->
     </div>
     <span class="text-dark">Si no tienes cuenta </span>
     <a [routerLink]="['/register']">Haz click Aquí</a>
