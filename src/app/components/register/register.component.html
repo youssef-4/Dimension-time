@@ -23,12 +23,12 @@
   </small>
 
   <!-- Password" --> <!-- <i class="far fa-eye"></i> icon -->
-  <label for="iamapassword" class="d-block mt-5">Password</label>
+  <label for="iamapassword1" class="d-block mt-5">Password</label>
   <div class="input-group">
-    <input type="password" class="form-control" id="iamapassword" placeholder="Input your password please"
-    [formControlName]="'password1'" [ngClass]="formInputColor('password1')" (keyup)="visible($event)">
+    <input type="password1" class="form-control" id="iamapassword1" placeholder="Input your password please"
+    [formControlName]="'password1'" [ngClass]="formInputColor('password1')" (keyup)="visibleI($event)">
     <span class="input-group-btn">
-      <button *ngIf="showPasswordOption" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIconI('iamapassword')"><i class="{{icon1}}"></i></button>
+      <button *ngIf="showPasswordOptionI" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIconI('iamapassword1')"><i class="{{icon1}}"></i></button>
     </span>
   </div>
   <small id="passwordHelp" class="form-text mb-2" *ngIf="msgColor('password1')"
@@ -38,12 +38,12 @@
 
   <!--Confirm Password-->
  <!-- Password" --> <!-- <i class="far fa-eye"></i> icon -->
- <label for="iamapassword" class="d-block mt-5">Password</label>
+ <label for="iamapassword2" class="d-block mt-5">Password</label>
  <div class="input-group">
    <input type="password" class="form-control" id="iamapassword2" placeholder="Input your password please"
-   [formControlName]="'password2'" [ngClass]="formInputColor('password2')" (keyup)="visible($event)">
+   [formControlName]="'password2'" [ngClass]="formInputColor('password2')" (keyup)="visibleII($event)">
    <span class="input-group-btn">
-     <button *ngIf="showPasswordOption" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIconII('iamapassword2')"><i class="{{icon2}}"></i></button>
+     <button *ngIf="showPasswordOptionII" class="btn btn-default reveal bg-secondary" type="button" (click)="changeIconII('iamapassword2')"><i class="{{icon2}}"></i></button>
    </span>
  </div>
  <small id="passwordHelp" class="form-text mb-2" *ngIf="msgColor('password2')"

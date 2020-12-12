@@ -15,7 +15,8 @@ export class RegisterComponent implements OnInit {
   sumitted = false;
 
   // ! If the password it's null hidde button show password else display button
-  showPasswordOption = false;
+  showPasswordOptionI = false;
+  showPasswordOptionII = false;
 
   // ! Validaciones del formulario loginForm
   registerForm = new FormGroup({
@@ -81,19 +82,34 @@ export class RegisterComponent implements OnInit {
   }
 
   // TODO : INPUT DESCRIPTION
-  visible($event: any): boolean{
+  visibleI($event: any): boolean{
     console.log($event);
     console.log($event.key);
     console.log($event.target);
     const item = document.getElementById($event.target.id) as HTMLInputElement;
     if (item?.value.length > 0){
-      this.showPasswordOption = true;
+      this.showPasswordOptionI = true;
       return true;
     }else{
-      this.showPasswordOption = false;
+      this.showPasswordOptionI = false;
       return false;
     }
   }
+
+    // TODO : INPUT DESCRIPTION
+    visibleII($event: any): boolean{
+      console.log($event);
+      console.log($event.key);
+      console.log($event.target);
+      const item = document.getElementById($event.target.id) as HTMLInputElement;
+      if (item?.value.length > 0){
+        this.showPasswordOptionII = true;
+        return true;
+      }else{
+        this.showPasswordOptionII = false;
+        return false;
+      }
+    }
 
   // ! Verificación del formulario loginForm
   submitForm(): void{
