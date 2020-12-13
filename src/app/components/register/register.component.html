@@ -1,4 +1,12 @@
-<form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+<div class="container-fluid mb-5">
+  <div class="row">
+    <a [routerLink]="['/login']" class="col-1">
+      <img src="../../../assets/flecha-izquierda.svg" alt="" id="flecha">
+    </a>
+  </div>
+</div>
+
+<form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="mt-5">
 
   <!-- Name -->
   <div class="form-group">
