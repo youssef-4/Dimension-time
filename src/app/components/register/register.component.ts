@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
-import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,6 +7,9 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  // ! Check if the button of Form loginForm it's submit or not
+  sumitted = false;
+
   // ! Every object have two items:
   // * icon -> Default icon when not make click in the show Password icon
   // * showPasswordOption -> Default icon when not make click in the show Password icon
@@ -17,12 +19,12 @@ export class RegisterComponent implements OnInit {
     password2: { item: 2, icon: 'far fa-eye', showPasswordOption: false },
   };
 
-  // ! Check if the button of Form loginForm it's submit or not
-  sumitted = false;
+  // Defino el formulario como FormGroup fuera del constructor con el fin de trabajar con el dentro del constructor
+  registerForm: FormGroup;
 
-  // ! Validaciones del formulario loginForm
-  registerForm = new FormGroup(
-    {
+  constructor(private formBuilder: FormBuilder) {
+    // ! Validaciones del formulario loginForm
+    this.registerForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [
         Validators.required,
@@ -35,20 +37,54 @@ export class RegisterComponent implements OnInit {
       password2: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
-        // RxwebValidators.compare({fieldName: 'password1'})
+        this.matchOtherValidator('password1') // this function call the method matchOtherValidator
       ]),
-    },
-  );
+    });
+  }
 
-  constructor() {}
+  // ! This function Validate if the input parameter its equals than input value
+  matchOtherValidator(otherControlName: string): any {
+    let thisControl: FormControl;
+    let otherControl: FormControl;
 
+    return function matchOtherValidate(control: FormControl): {matchOther: boolean} | null {
+      if (!control.parent) {
+        return null;
+      }
+
+      // Initializing the validator.
+      if (!thisControl) {
+        thisControl = control;
+        otherControl = control.parent.get(otherControlName) as FormControl;
+        if (!otherControl) {
+          throw new Error(
+            'matchOtherValidator(): other control is not found in parent group'
+          );
+        }
+        otherControl.valueChanges.subscribe(() => {
+          thisControl.updateValueAndValidity();
+        });
+      }
+
+      if (!otherControl) {
+        return null;
+      }
+
+      if (otherControl.value !== thisControl.value) {
+        return {
+          matchOther: true,
+        };
+      }
+
+      return null;
+    };
+  }
+
+  // ! ngOnInitComponent
   ngOnInit(): void {}
 
-  // Show or hidde button if the input have text
+  // ! Show or hidde button if the input field if this have text
   visible($event: any, num: number): boolean {
-    console.log($event);
-    console.log($event.key);
-    console.log($event.target);
     const item = document.getElementById($event.target.id) as HTMLInputElement;
     if (this.passwords.password1.item === num) {
       if (item?.value.length > 0) {
@@ -76,16 +112,10 @@ export class RegisterComponent implements OnInit {
       this.passwords.password1.icon === 'far fa-eye'
         ? (this.passwords.password1.icon = 'far fa-eye-slash')
         : (this.passwords.password1.icon = 'far fa-eye');
-      console.log(
-        'Current icon to Password1 changed to ' + this.passwords.password1.icon
-      );
     } else if (this.passwords.password2.item === num) {
       this.passwords.password2.icon === 'far fa-eye'
         ? (this.passwords.password2.icon = 'far fa-eye-slash')
         : (this.passwords.password2.icon = 'far fa-eye');
-      console.log(
-        'Current icon to Password2 changed to ' + this.passwords.password2.icon
-      );
     }
     this.changePassword(element);
   }
@@ -96,17 +126,12 @@ export class RegisterComponent implements OnInit {
   // * Y finalmente añadimos (focusout)="resetIconNotTxt($event, 2) al input
   resetIconNotTxt(e: any, num: number): void {
     const input = document.getElementById(e.target.id) as HTMLTextAreaElement;
-    // console.log('Trim', input.value.trim());
-    // console.log(input.value.trim().length);
     if (
       input.value.trim().length === 0 &&
       input?.getAttribute('type') === 'text'
     ) {
-      console.log('La contraseña se oculta por seguridad');
-      console.log(input);
       this.changeIcon(input.id, num);
     }
-
   }
 
   // ! - Change input type to the password type to text type
@@ -121,34 +146,10 @@ export class RegisterComponent implements OnInit {
 
   // ! Verificación del formulario loginForm
   submitForm(): void {
-    this.loggerFormAndFieldsInfo();
     this.sumitted = true;
-  }
-
-  // TODO : INPUT DESCRIPTION
-  loggerFormAndFieldsInfo(): void {
-    console.log('---------------------------------------------------');
-    // ! Email Field Validation Result
-    this.registerForm.get('name')?.status === 'VALID'
-      ? console.log('Name OK')
-      : console.error('Name KO');
-    // ! Email Field Validation Result
-    this.registerForm.get('email')?.status === 'VALID'
-      ? console.log('Email OK')
-      : console.error('Email KO');
-    // ! Password1 Field Validation
-    this.registerForm.get('password1')?.status === 'VALID'
-      ? console.log('Password1 OK')
-      : console.error('Password1 KO');
-    // ! Password2 Field Validation
-    this.registerForm.get('password2')?.status === 'VALID'
-      ? console.log('Password2 OK')
-      : console.error('Password2 KO');
-    // ! Form Validation Result
-    this.registerForm?.status === 'VALID'
-      ? console.log('Form OK')
-      : console.error('Form KO');
-    console.log('---------------------------------------------------');
+    if (this.registerForm.valid === true){
+      console.log('Send form to firebase');
+    }
   }
 
   // ! Change color of the input with BootStrap class is-valid or is-invalid

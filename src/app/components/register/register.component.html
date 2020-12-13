@@ -7,7 +7,7 @@
 </div>
 
 <form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="mt-5">
-
+  <!--<p>{{registerForm.get('password2')?.errors | json}}</p>-->
   <!-- Name -->
   <div class="form-group">
     <label for="name">Name</label>
@@ -60,10 +60,17 @@
         (click)="changeIcon('iamapassword2', 2)"><i class="{{passwords.password2.icon}}"></i></button>
     </span>
   </div>
-  <small id="passwordHelp" class="form-text mb-2" *ngIf="msgColor('password2')"
-    [ngClass]="msgColor('password2')? 'text-danger' : 'text-success'">
-    La password no es igual a password1 o no tiene 6 caracteres
-  </small>
+  <div *ngIf="registerForm.get('password2')?.errors !== null && sumitted === true">
+    <small id="passwordHelp" class="form-text mb-2" *ngIf="registerForm.get('password2')?.errors?.minlength"
+      [ngClass]="msgColor('password2')? 'text-success' : 'text-danger'">
+      La password2 no tiene 6 caracteres
+      <span *ngIf="registerForm.get('password2')?.errors?.minlength && registerForm.get('password2')?.errors?.matchOther"> y</span>
+    </small>
+    <small id="passwordHelp" class="form-text mb-2" *ngIf="registerForm.get('password2')?.errors?.matchOther"
+      [ngClass]="msgColor('password2')? 'text-success' : 'text-danger'">
+      las contraseñas no coinciden
+    </small>
+  </div>
 
   <!--Send form Buttom-->
   <div class="text-center w-100">
