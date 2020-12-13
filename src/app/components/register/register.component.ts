@@ -35,9 +35,9 @@ export class RegisterComponent implements OnInit {
       password2: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
-        RxwebValidators.compare({fieldName: 'password1'})
+        // RxwebValidators.compare({fieldName: 'password1'})
       ]),
-    }
+    },
   );
 
   constructor() {}
