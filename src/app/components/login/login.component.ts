@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   submitForm(): void {
     this.sumitted = true;
     if (this.loginForm.valid === true){
-      console.log('Send form to firebase');
+      console.log('Send login form to firebase');
     }
   }
 

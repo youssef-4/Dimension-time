@@ -148,7 +148,7 @@ export class RegisterComponent implements OnInit {
   submitForm(): void {
     this.sumitted = true;
     if (this.registerForm.valid === true){
-      console.log('Send form to firebase');
+      console.log('Send register form to firebase');
     }
   }
 

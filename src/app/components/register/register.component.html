@@ -60,14 +60,14 @@
         (click)="changeIcon('iamapassword2', 2)"><i class="{{passwords.password2.icon}}"></i></button>
     </span>
   </div>
-  <div *ngIf="registerForm.get('password2')?.errors !== null && sumitted === true">
-    <small id="passwordHelp" class="form-text mb-2" *ngIf="registerForm.get('password2')?.errors?.minlength"
-      [ngClass]="msgColor('password2')? 'text-success' : 'text-danger'">
-      La password2 no tiene 6 caracteres
-      <span *ngIf="registerForm.get('password2')?.errors?.minlength && registerForm.get('password2')?.errors?.matchOther"> y</span>
+  <div *ngIf="registerForm.get('password2')?.errors !== null">
+    <small id="passwordHelp" class="form-text mb-2" *ngIf="registerForm.get('password2')?.errors?.minlength && sumitted === true"
+      [ngClass]="msgColor('password2')? 'text-danger': 'text-success'">
+      La password no tiene 6 caracteres
+      <span *ngIf="registerForm.get('password2')?.errors?.minlength && registerForm.get('password2')?.errors?.matchOther && sumitted === true"> y</span>
     </small>
-    <small id="passwordHelp" class="form-text mb-2" *ngIf="registerForm.get('password2')?.errors?.matchOther"
-      [ngClass]="msgColor('password2')? 'text-success' : 'text-danger'">
+    <small id="passwordHelp" class="form-text mb-2" *ngIf="registerForm.get('password2')?.errors?.matchOther && sumitted === true"
+      [ngClass]="msgColor('password2')? 'text-danger': 'text-success'">
       las contraseñas no coinciden
     </small>
   </div>
