@@ -177,6 +177,8 @@ export class RegisterComponent implements OnInit {
       const email = this.registerForm.get('email')?.value;
       const password = this.registerForm?.get('password1')?.value;
       this.authService.onRegister(email, password);
+    } else{
+      console.log('El formulario no se ha enviado');
     }
   }
 }

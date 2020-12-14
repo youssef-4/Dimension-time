@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
           const password = this.loginForm?.get('password1')?.value;
           const user = await this.authService.onLogin(email, password);
           if (user){
-            this.router.navigate(['tasklist']);
+            this.router.navigate(['/timetask']);
           }
           console.log('Send login form to firebase');
         }
