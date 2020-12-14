@@ -56,25 +56,24 @@ export class LoginComponent implements OnInit {
     }
     return true;
   }
-  myUser: any;
-    // ! Verificación del formulario loginForm
-    async submitForm(): Promise<any> {
-      let email: string
-      this.sumitted = true;
-      try{
-        if (this.loginForm.valid === true){
-          email = this.loginForm.get('email')?.value;
-          const password = this.loginForm?.get('password')?.value;
-          const user = await this.authService.onLogin(email, password);
-          // this.myUser = user;
-          console.log(user?.['user']['email']);
-          if (user?.['user']['email']){
-            this.router.navigate(['/timetask']);
-          }
-          console.log('Send login form to firebase');
+
+  // ! Verificación del formulario loginForm
+  async submitForm(): Promise<any> {
+    let email: string;
+    this.sumitted = true;
+    try{
+      if (this.loginForm.valid === true){
+        email = this.loginForm.get('email')?.value;
+        const password = this.loginForm?.get('password')?.value;
+        const user = await this.authService.onLogin(email, password);
+        console.log(user?.['user']['email']);
+        if (user?.['user']['email']){
+          this.router.navigate(['/timetask']);
         }
-      } catch (err){
-        console.log(err);
+        console.log('Send login form to firebase');
       }
+    } catch (err){
+      console.log(err);
     }
+  }
 }

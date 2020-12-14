@@ -17,6 +17,7 @@ export class AuthService {
 
   async onLogout(): Promise<any> {
     try {
+      console.log('Log out done');
       await this.afAuth.signOut();
     } catch (err) { return(err); }
   }
