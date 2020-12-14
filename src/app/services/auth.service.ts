@@ -9,25 +9,26 @@ export class AuthService {
   // public user: User;
   constructor(public afAuth: AngularFireAuth) {}
 
-  async onLogin(email: string, password: string) {
+  async onLogin(email: string, password: string): Promise<any> {
     try {
       return await this.afAuth.signInWithEmailAndPassword(email, password);
-    } catch (err) { console.log(err); }
+    } catch (err) { return(err); }
   }
 
-  async onLogout() {
+  async onLogout(): Promise<any> {
     try {
       await this.afAuth.signOut();
-    } catch (err) { console.log(err); }
+    } catch (err) { return(err); }
   }
 
-  async onRegister(email: string, password: string) {
+  async onRegister(email: string, password: string): Promise<any> {
     try {
+      console.log('Register done in firebase');
       return await this.afAuth.createUserWithEmailAndPassword(email, password);
-    } catch (err) { console.log(err); }
+    } catch (err) { return(err); }
   }
 
-  getCurrentUser() {
+  getCurrentUser(): Promise<any> {
     try {
       return this.afAuth.authState.pipe(first()).toPromise();
     } catch (err) { return(err); }

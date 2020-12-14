@@ -1,10 +1,11 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
-  Validators,
-  FormBuilder,
+  Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   sumitted = false;
   loginForm: FormGroup;
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
     // ! Validaciones del formulario loginForm
     this.loginForm = new FormGroup({
       email: new FormControl('', [
@@ -30,13 +31,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // ! Verificación del formulario loginForm
-  submitForm(): void {
-    this.sumitted = true;
-    if (this.loginForm.valid === true){
-      console.log('Send login form to firebase');
-    }
-  }
+  ngOnInit(): void {}
 
   // ! Change color of the input with BootStrap class is-valid or is-invalid
   formInputColor(field: string): string {
@@ -62,5 +57,21 @@ export class LoginComponent implements OnInit {
     return true;
   }
 
-  ngOnInit(): void {}
+    // ! Verificación del formulario loginForm
+    async submitForm(): Promise<any> {
+      this.sumitted = true;
+      try{
+        if (this.loginForm.valid === true){
+          const email = this.loginForm.get('email')?.value;
+          const password = this.loginForm?.get('password1')?.value;
+          const user = await this.authService.onLogin(email, password);
+          if (user){
+            this.router.navigate(['tasklist']);
+          }
+          console.log('Send login form to firebase');
+        }
+      } catch (err){
+        console.log(err);
+      }
+    }
 }
