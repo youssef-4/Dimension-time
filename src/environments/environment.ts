@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // Firebase configuration
-  firebaseConfig : {
+  firebaseConfig: {
     apiKey: 'AIzaSyD671ac0MvReJTuweCScnI6hwpN1bqQ2Hc',
     authDomain: 'dimension-time-ydo.firebaseapp.com',
     projectId: 'dimension-time-ydo',

@@ -1,5 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-register',
@@ -22,23 +24,23 @@ export class RegisterComponent implements OnInit {
   // Defino el formulario como FormGroup fuera del constructor con el fin de trabajar con el dentro del constructor
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
     // ! Validaciones del formulario loginForm
     this.registerForm = this.formBuilder.group({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [
+      name: ['', [Validators.required]],
+      email: ['', [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      ]),
-      password1: new FormControl('', [
+      ]],
+      password1: ['', [
         Validators.required,
         Validators.minLength(6),
-      ]),
-      password2: new FormControl('', [
+      ]],
+      password2: ['', [
         Validators.required,
         Validators.minLength(6),
         this.matchOtherValidator('password1') // this function call the method matchOtherValidator
-      ]),
+      ]],
     });
   }
 
@@ -144,14 +146,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  // ! Verificación del formulario loginForm
-  submitForm(): void {
-    this.sumitted = true;
-    if (this.registerForm.valid === true){
-      console.log('Send register form to firebase');
-    }
-  }
-
   // ! Change color of the input with BootStrap class is-valid or is-invalid
   formInputColor(field: string): string {
     if (this.sumitted === true) {
@@ -174,5 +168,16 @@ export class RegisterComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  // ! Verificación del formulario loginForm
+  submitForm(): void {
+    this.sumitted = true;
+    if (this.registerForm.valid === true){
+      const email = this.registerForm.get('email')?.value;
+      const password = this.registerForm?.get('password1')?.value;
+      this.authService.onRegister(email, password);
+      console.log('Send register form to firebase');
+    }
   }
 }
