@@ -23,8 +23,10 @@
     "@rxweb/reactive-form-validators": "^2.1.2",
     "@types/firebase": "^3.2.1",
     "@types/jquery": "^3.5.5",
+    "@types/moment": "^2.13.0",
     "bootstrap-icons": "^1.2.0",
     "firebase": "^8.2.0",
+    "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
