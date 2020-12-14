@@ -30,6 +30,6 @@ export class AuthService {
   getCurrentUser() {
     try {
       return this.afAuth.authState.pipe(first()).toPromise();
-    } catch (err) { console.log(err); }
+    } catch (err) { return(err); }
   }
 }
