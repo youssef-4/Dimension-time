@@ -10,6 +10,7 @@ import { TimeTaskComponent } from './components/time-task/time-task.component';
 import { ListTaskComponent } from './components/list-task/list-task.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListTasksComponent } from './components/list-tasks/list-tasks.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     TimeTaskComponent,
     ListTaskComponent,
-    HomeComponent
+    HomeComponent,
+    ListTasksComponent
   ],
   imports: [
     BrowserModule,
