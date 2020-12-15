@@ -2,6 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { stringify } from '@angular/compiler/src/util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,7 @@ export class RegisterComponent implements OnInit {
   // Defino el formulario como FormGroup fuera del constructor con el fin de trabajar con el dentro del constructor
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
     // ! Validaciones del formulario loginForm
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -173,10 +174,15 @@ export class RegisterComponent implements OnInit {
   // ! Verificación del formulario loginForm
   submitForm(): void {
     this.sumitted = true;
+    let checkCommuter: any;
     if (this.registerForm.valid === true){
       const email = this.registerForm.get('email')?.value;
       const password = this.registerForm?.get('password1')?.value;
-      this.authService.onRegister(email, password);
+      checkCommuter = this.authService.onRegister(email, password);
+      console.log(checkCommuter);
+      if(checkCommuter){
+        this.router.navigate(['/login']);
+      }
     } else{
       console.log('El formulario no se ha enviado');
     }

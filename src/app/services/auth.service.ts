@@ -24,7 +24,7 @@ export class AuthService {
 
   async onRegister(email: string, password: string): Promise<any> {
     try {
-      console.log('Register done in firebase');
+      console.log('Llamado a registro de firebase...');
       return await this.afAuth.createUserWithEmailAndPassword(email, password);
     } catch (err) { return(err); }
   }

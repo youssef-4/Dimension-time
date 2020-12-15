@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="mt-5">
+<form [formGroup]="registerForm" (ngSubmit)="submitForm()">
   <!--<p>{{registerForm.get('password2')?.errors | json}}</p>-->
   <!-- Name -->
   <div class="form-group">
@@ -20,7 +20,7 @@
   </small>
 
   <!-- Email -->
-  <div class="form-group mt-5">
+  <div class="form-group mt-2">
     <label for="email">Email</label>
     <input type="email" class="form-control" id="inputEmail" placeholder="Input your email please"
       [formControlName]="'email'" [ngClass]="formInputColor('email')">
@@ -32,7 +32,7 @@
 
   <!-- Password1" -->
   <!-- <i class="far fa-eye"></i> icon -->
-  <label for="iamapassword1" class="d-block mt-5">Password</label>
+  <label for="iamapassword1" class="d-block mt-2">Password</label>
   <div class="input-group">
     <input type="password" class="form-control" id="iamapassword1" placeholder="Input your password please"
       [formControlName]="'password1'" [ngClass]="formInputColor('password1')" (keyup)="visible($event, 1)"
@@ -50,7 +50,7 @@
   <!--Confirm Password-->
   <!-- Password2" -->
   <!-- <i class="far fa-eye"></i> icon -->
-  <label for="iamapassword2" class="d-block mt-5">Confirm password</label>
+  <label for="iamapassword2" class="d-block mt-2">Confirm password</label>
   <div class="input-group">
     <input type="password" class="form-control" id="iamapassword2" placeholder="Input your password please"
       [formControlName]="'password2'" [ngClass]="formInputColor('password2')" (keyup)="visible($event, 2)"
@@ -73,8 +73,8 @@
   </div>
 
   <!--Send form Buttom-->
-  <div class="text-center w-100">
-    <button type="submit" class="btn btn-dark d-inline mt-5 mb-3">Submit</button>
+  <div class="text-center w-100 mt-5">
+    <button type="submit" class="btn btn-dark d-inline mt-2 mb-3">Submit</button>
     <!--[disabled]="!loginForm.valid" -->
   </div>
 </form>
