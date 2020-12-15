@@ -4,18 +4,18 @@
   <div id="reloj">
   </div>
     <label for="task">Nombre de la tarea: </label>&nbsp;&nbsp;
-    <input type="text" name="task" id="">
+    <input type="text" name="task" id="" [(ngModel)] = "nameTask">
     <br>
     <label for="inicio">Inicio de la tarea:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="datetime" name="inicio" id="" [(ngModel)]= "startDate" disabled>
+    <input type="text" name="inicio" id="" [value]= "startDate" disabled>
     <br>
     <label for="tiempoMinutos">Tiempo de la tarea: </label>&nbsp;&nbsp;
-    <input type="datetime" name="tiempoMinutos" id="" [(ngModel)]= "nowDate" disabled>
+    <input type="text" name="tiempoMinutos" id="" [value]= "nowDate" disabled>
     <br/>
+
     <div class="d-flex justify-content-center">
-      <input type="button" [(ngModel)]="buttonTxt" name="boton1"
-      [ngClass]="changesColorBtn() ? 'btnRed' : 'btnGreen' "
-      (click) = "startTimmer($event)"/>
+      <input type="button" value="Start" (click) = "startTimmer($event)">
+      <input type="button" value="Stop" (click) = "stopTimmer($event)">
     </div>
     <br/>
 </div>
