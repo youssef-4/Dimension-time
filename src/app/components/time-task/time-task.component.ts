@@ -16,11 +16,13 @@ export class TimeTaskComponent implements OnInit {
   constructor() {}
 
   changesColorBtn(): boolean {
-    if (this.breaker === false){
+    if (this.breaker === true){
       this.buttonTxt = 'Stop';
       return false;
     } else{
       this.buttonTxt = 'Start';
+      this.startDate = null;
+      this.nowDate = null;
       return true;
     }
   }
@@ -39,8 +41,6 @@ export class TimeTaskComponent implements OnInit {
     }, 1000);
 
     console.log(this.nowDate);
-
-
   }
 
   stopTimmer(): void{

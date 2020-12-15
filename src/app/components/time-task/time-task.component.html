@@ -3,14 +3,17 @@
 <div id="cronometro">
   <div id="reloj">
   </div>
+    <label for="task">Nombre de la tarea: </label>&nbsp;&nbsp;
+    <input type="text" name="task" id="">
+    <br>
     <label for="inicio">Inicio de la tarea:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="datetime" name="inicio" id="" [value]= "startDate" disabled>
+    <input type="datetime" name="inicio" id="" [(ngModel)]= "startDate" disabled>
     <br>
     <label for="tiempoMinutos">Tiempo de la tarea: </label>&nbsp;&nbsp;
-    <input type="datetime" name="tiempoMinutos" id="" [value]= "nowDate">
+    <input type="datetime" name="tiempoMinutos" id="" [(ngModel)]= "nowDate" disabled>
     <br/>
     <div class="d-flex justify-content-center">
-      <input type="button" [value]="buttonTxt" name="boton1"
+      <input type="button" [(ngModel)]="buttonTxt" name="boton1"
       [ngClass]="changesColorBtn() ? 'btnRed' : 'btnGreen' "
       (click) = "startTimmer($event)"/>
     </div>

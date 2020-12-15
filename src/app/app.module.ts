@@ -9,7 +9,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { TimeTaskComponent } from './components/time-task/time-task.component';
 import { ListTaskComponent } from './components/list-task/list-task.component';
 import { HomeComponent } from './components/home/home.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
@@ -29,7 +29,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
