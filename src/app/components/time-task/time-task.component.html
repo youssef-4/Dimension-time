@@ -6,10 +6,10 @@
   <input type="text" name="task" id="" [(ngModel)]="nameTask">
   <br>
   <label for="inicio">Inicio de la tarea:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-  <input type="text" name="inicio" id="" [value]="startDate" disabled>
+  <input type="text" name="inicio" id="" [(ngModel)]="startDate" disabled>
   <br>
   <label for="tiempoMinutos">Tiempo de la tarea: </label>&nbsp;&nbsp;
-  <input type="text" name="tiempoMinutos" id="" [value]="nowDate" disabled>
+  <input type="text" name="tiempoMinutos" id="" [(ngModel)]="nowDate" disabled>
   <br />
   <!-- Buttons -->
   <div class="d-flex justify-content-center mt-5">
@@ -18,9 +18,8 @@
   </div>
   <br />
   <!-- Last Task -->
-  <ul class="list-group" *ngIf="showTask">
-    <li class="list-group-item active" aria-current="true">{{myLastTask.nameTask}}</li>
-    <li class="list-group-item">{{myLastTask.startTask}}</li>
-    <li class="list-group-item">{{myLastTask.timeTask}}</li>
-  </ul>
+    <ul class="list-group" *ngFor="let task of allTask">
+      <p>{{task}}</p>
+    </ul>
+
 </div>

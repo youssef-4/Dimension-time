@@ -9,9 +9,12 @@ import * as moment from 'moment';
 export class TimeTaskComponent implements OnInit {
   nowDate = ' ';
   startDate: any = '';
-  myInterval: any = '';
+  myInterval: any;
   nameTask = '';
-  myLastTask = {
+
+  allTask: any = [];
+
+  task = {
     nameTask: '',
     startTask : '',
     timeTask : ''
@@ -23,13 +26,20 @@ export class TimeTaskComponent implements OnInit {
 
   constructor() {}
 
+  saveTask(myLastTask: any): void{
+    this.allTask.push(myLastTask);
+    console.log(this.allTask);
+  }
+
   stopTimmer(): void {
       // Stop interval
       clearInterval(this.myInterval);
       // Set new values for the task
-      this.myLastTask.nameTask = this.nameTask;
-      this.myLastTask.startTask = this.startDate;
-      this.myLastTask.timeTask = this.nowDate;
+      this.task.nameTask = this.nameTask;
+      this.task.startTask = this.startDate;
+      this.task.timeTask = this.nowDate;
+      // TODO: Save in Firebase
+      this.saveTask(JSON.stringify(this.task));
       // Reset task
       this.startDate = '';
       this.nowDate = '';
@@ -38,7 +48,6 @@ export class TimeTaskComponent implements OnInit {
       this.showBtnStart = !this.showBtnStart;
       this.showBtnStop = !this.showBtnStop;
       this.showTask = true;
-      // true = false
   }
 
   startTimmer(): void{
