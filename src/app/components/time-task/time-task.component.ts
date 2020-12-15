@@ -23,7 +23,6 @@ export class TimeTaskComponent implements OnInit {
       this.buttonTxt = 'Start';
       return true;
     }
-    console.log('activamos botón');
   }
 
   startTimmer(event: any): void{

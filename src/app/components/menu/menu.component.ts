@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,13 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
-  constructor(private authService: AuthService) { }
-  ngOnInit(): void {}
+  visibleLogOut = 'Logout';
+  constructor(private authService: AuthService, private router: Router) { }
+  ngOnInit(): void {
+    this.visibleLogOut = 'Logout';
+  }
 
   logOut(): any{
     const response = this.authService.onLogout();
     console.log(response);
+    this.router.navigate(['/login']);
   }
 
 }
